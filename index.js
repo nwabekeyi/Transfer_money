@@ -39,7 +39,7 @@ app.post('/api/payments', async (req, res) => {
     // Save the payment to the database
     await payment.save();
 
-    res.status(201).json(payment); // Send back the saved payment as response
+    res.status(201).send('Payment detail succesfully added to database'); // Send back the saved payment as response
   } catch (error) {
     console.error('Error creating payment:', error);
     res.status(500).json({ error: 'Internal server error' });
