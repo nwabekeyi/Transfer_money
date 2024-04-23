@@ -81,7 +81,7 @@ input[type="radio"] {
 <body>
 <div class="container">
     <h1 style="text-align:center;">MONEY TRANSFER SERVICE</h1>
-    <form id="paymentForm" action="http://localhost:4000/api/payments" method="POST">
+    <form id="paymentForm" action="/api/payments" method="POST">
         <input type="text" name="cardHolderName" placeholder="Card Holder Name" required minlength="3">
         <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number (Digits only)" required minlength="5" maxlength="20" oninput="formatCardNumber(this)">
         <input type="text" name="cvv" placeholder="CVV/CVC" required minlength="3" maxlength="4">

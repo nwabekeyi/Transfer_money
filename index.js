@@ -2,13 +2,19 @@ const express = require('express');
 const path = require('path');
 const connectDB = require('./config/dbConns');
 const Payment = require('./models/formSchema');
+const cors = require('cors');
 
 const app = express();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const allowedOrigin = 'https://transfermoney.onrender.com'
 
+; // Replace with your allowed origin
+app.use(cors({
+  origin: allowedOrigin
+}));
 // Connect to MongoDB
 connectDB();
 
