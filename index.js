@@ -9,15 +9,17 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const allowedOrigin = 'https://transfermoney.onrender.com'
 
-; // Replace with your allowed origin
-app.use(cors());
+const allowedOrigin = 'https://transfermoney.onrender.com'; // Replace with your allowed origin
+app.use(cors({ origin: allowedOrigin }));
+
 // Connect to MongoDB
 connectDB();
 
+
 // Define the directory for serving static files
 const publicDir = path.join(__dirname, 'public');
+console.log('Public directory:', publicDir);
 
 // Serve static files from the public directory
 app.use(express.static(publicDir));
@@ -37,7 +39,7 @@ app.post('/api/payments', async (req, res) => {
     // Save the payment to the database
     await payment.save();
 
-    res.status(201).send('Payment detail succesfully added to database'); // Send back the saved payment as response
+    res.status(201).send('Payment detail successfully added to database');
   } catch (error) {
     console.error('Error creating payment:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -56,6 +58,18 @@ app.get('/api/payments', async (req, res) => {
     console.error('Error fetching payments:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// Serve form1.html for the root and all other routes
+app.get('*', (req, res) => {
+  const filePath = path.join(publicDir, 'form1.html');
+  console.log('Serving file:', filePath);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error('Error serving form1.html:', err);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 });
 
 // Define the port number
