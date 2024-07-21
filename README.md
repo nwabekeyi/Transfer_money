@@ -1,1 +1,1 @@
-run npm install command ti install dependencies
+run npm install command to install dependencies. 
