@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const allowedOrigin = 'https://transfermoney.onrender.com'; // Replace with your allowed origin
-app.use(cors({ origin: allowedOrigin }));
+app.use(cors());
 
 // Connect to MongoDB
 connectDB();
